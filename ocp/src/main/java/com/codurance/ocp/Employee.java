@@ -14,7 +14,7 @@ public class Employee {
 
     public int payAmount() {
         switch (this.type) {
-            case ENGENIEER:
+            case ENGINEER:
                 return salary;
             case MANAGER:
                 return salary + bonus;

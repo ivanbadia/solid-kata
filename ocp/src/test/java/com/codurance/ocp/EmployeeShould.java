@@ -11,7 +11,7 @@ class EmployeeShould {
 
     @Test
     public void not_add_bonus_to_the_engineer_pay_amount() {
-        Employee employee = new Employee(SALARY, BONUS, EmployeeType.ENGENIEER);
+        Employee employee = new Employee(SALARY, BONUS, EmployeeType.ENGINEER);
         assertThat(employee.payAmount())
                 .isEqualTo(SALARY);
     }
