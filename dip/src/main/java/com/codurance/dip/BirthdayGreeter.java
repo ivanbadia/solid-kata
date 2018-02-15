@@ -13,9 +13,15 @@ public class BirthdayGreeter {
     }
 
     public void sendGreetings() {
+        employeeRepository.findEmployeesBornOn(monthDayOfToday())
+                .stream()
+                .map(this::emailFor)
+                .forEach(email -> new EmailSender().send(email));
+    }
+
+    private MonthDay monthDayOfToday() {
         LocalDate today = clock.today();
-        employeeRepository.findEmployeesBornOn(MonthDay.of(today.getMonth(), today.getDayOfMonth()))
-                .forEach(employee -> new EmailSender().send(emailFor(employee)));
+        return MonthDay.of(today.getMonth(), today.getDayOfMonth());
     }
 
     private Email emailFor(Employee employee) {
