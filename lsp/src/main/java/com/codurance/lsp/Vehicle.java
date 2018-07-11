@@ -2,14 +2,24 @@ package com.codurance.lsp;
 
 public abstract class Vehicle {
 
-    private static final int FULL = 100;
-    private int fuelTankLevel = 0;
 
-    public void fillUpWithFuel(){
-        this.fuelTankLevel = FULL;
+    private boolean engineStarted = false;
+
+    public void startEngine() {
+        this.engineStarted = true;
     }
 
-    public int fuelTankLevel() {
-        return fuelTankLevel;
+    public boolean engineIsStarted() {
+        return engineStarted;
     }
+
+    public void stopEngine() {
+        this.engineStarted = false;
+    }
+
+    public abstract void fillUpWithFuel();
+
+    public abstract void chargeBattery();
+
+
 }
