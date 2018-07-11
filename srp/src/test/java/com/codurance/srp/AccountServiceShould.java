@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.refEq;
@@ -22,10 +23,10 @@ public class AccountServiceShould {
     private static final int POSITIVE_AMOUNT = 100;
     private static final int NEGATIVE_AMOUNT = -POSITIVE_AMOUNT;
     private static final LocalDate TODAY = LocalDate.of(2017, 9, 6);
-    private static final List<Transaction> TRANSACTIONS = List.of(
-            new Transaction(LocalDate.of(2014, 4, 1), 1000),
-            new Transaction(LocalDate.of(2014, 4, 2), -100),
-            new Transaction(LocalDate.of(2014, 4, 10), 500)
+    private static final List<Transaction> TRANSACTIONS = Arrays.asList(
+        new Transaction(LocalDate.of(2014, 4, 1), 1000),
+        new Transaction(LocalDate.of(2014, 4, 2), -100),
+        new Transaction(LocalDate.of(2014, 4, 10), 500)
     );
 
     @Mock
