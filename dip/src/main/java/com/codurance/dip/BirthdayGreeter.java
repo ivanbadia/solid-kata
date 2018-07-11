@@ -1,6 +1,5 @@
 package com.codurance.dip;
 
-import java.time.LocalDate;
 import java.time.MonthDay;
 
 public class BirthdayGreeter {
@@ -13,15 +12,11 @@ public class BirthdayGreeter {
     }
 
     public void sendGreetings() {
-        employeeRepository.findEmployeesBornOn(monthDayOfToday())
+        MonthDay today = clock.today();
+        employeeRepository.findEmployeesBornOn(today)
                 .stream()
                 .map(employee -> emailFor(employee))
                 .forEach(email -> new EmailSender().send(email));
-    }
-
-    private MonthDay monthDayOfToday() {
-        LocalDate today = clock.today();
-        return MonthDay.of(today.getMonth(), today.getDayOfMonth());
     }
 
     private Email emailFor(Employee employee) {

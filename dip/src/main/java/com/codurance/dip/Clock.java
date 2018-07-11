@@ -1,9 +1,9 @@
 package com.codurance.dip;
 
-import java.time.LocalDate;
+import java.time.MonthDay;
 
 public class Clock {
-    public LocalDate today(){
-        return LocalDate.now();
+    public MonthDay today(){
+        return MonthDay.now();
     }
 }
