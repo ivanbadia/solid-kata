@@ -12,7 +12,7 @@ public class BirthdayGreeter {
     }
 
     public void sendGreetings() {
-        MonthDay today = clock.today();
+        MonthDay today = clock.monthDay();
         employeeRepository.findEmployeesBornOn(today)
                 .stream()
                 .map(employee -> emailFor(employee))
