@@ -18,31 +18,32 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServiceShould {
+public class AccountServiceTest {
 
     private static final int POSITIVE_AMOUNT = 100;
     private static final int NEGATIVE_AMOUNT = -POSITIVE_AMOUNT;
     private static final LocalDate TODAY = LocalDate.of(2017, 9, 6);
     private static final List<Transaction> TRANSACTIONS = Arrays.asList(
-        new Transaction(LocalDate.of(2014, 4, 1), 1000),
-        new Transaction(LocalDate.of(2014, 4, 2), -100),
-        new Transaction(LocalDate.of(2014, 4, 10), 500)
+            new Transaction(LocalDate.of(2014, 4, 1), 1000),
+            new Transaction(LocalDate.of(2014, 4, 2), -100),
+            new Transaction(LocalDate.of(2014, 4, 10), 500)
     );
 
     @Mock
-    private Clock clock;
-
-    @Mock
-    private TransactionRepository transactionRepository;
-
+    public Clock clock;
     @Mock
     private Console console;
+    @Mock
+    private TransactionPrinter transactionPrinter;
+    @Mock
+    private TransactionRepository transactionRepository;
 
     private AccountService accountService;
 
     @Before
     public void setUp() {
-        accountService = new AccountService(transactionRepository, clock, console);
+        accountService = new AccountService(transactionRepository, clock);
+        transactionPrinter = new TransactionPrinter(transactionRepository, console);
         given(clock.today()).willReturn(TODAY);
     }
 
@@ -68,7 +69,7 @@ public class AccountServiceShould {
     public void print_statement() {
         given(transactionRepository.all()).willReturn(TRANSACTIONS);
 
-        accountService.printStatement();
+        transactionPrinter.printStatement();
 
         InOrder inOrder = inOrder(console);
         inOrder.verify(console).printLine("DATE | AMOUNT | BALANCE");
