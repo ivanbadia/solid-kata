@@ -1,9 +1,8 @@
 package com.codurance.srp;
 
-public interface AccountService {
+public interface AccountManageService {
     void deposit(int amount);
 
     void withdraw(int amount);
 
-    void printStatement();
 }

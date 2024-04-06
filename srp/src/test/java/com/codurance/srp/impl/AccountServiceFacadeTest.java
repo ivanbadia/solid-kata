@@ -1,6 +1,7 @@
-package com.codurance.srp;
+package com.codurance.srp.impl;
 
 
+import com.codurance.srp.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServiceShould {
+public class AccountServiceFacadeTest {
 
     private static final int POSITIVE_AMOUNT = 100;
     private static final int NEGATIVE_AMOUNT = -POSITIVE_AMOUNT;
@@ -42,10 +43,12 @@ public class AccountServiceShould {
 
     @Before
     public void setUp() {
-        accountService = new AccountService(transactionRepository, clock, console);
+        accountService = new AccountServiceFacade(
+                new AccountManageServiceImpl(transactionRepository, clock),
+                new AccountReportServiceImpl(transactionRepository, console)
+        );
         given(clock.today()).willReturn(TODAY);
     }
-
 
     @Test
     public void deposit_amount_into_the_account() {
